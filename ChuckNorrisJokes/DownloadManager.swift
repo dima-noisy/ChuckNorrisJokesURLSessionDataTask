@@ -1,7 +1,5 @@
 import Foundation
 
-//https://api.chucknorris.io/jokes/random
-
 enum DownloadError: Error {
     case errorAnswerCode
     case dataIsNil
@@ -10,7 +8,6 @@ enum DownloadError: Error {
 
 class DownloadManager {
     func downloadRandomJoke(completion: ((Result<String, DownloadError>) -> Void)?) {
-    //func downloadRandomJoke(completion: ((_ jokeText: String?) -> Void)? ) {
         let session = URLSession.shared
         let url = URL(string: "https://api.chucknorris.io/jokes/random")
         let task = session.dataTask(with: url!) { data, responce, error in
@@ -32,7 +29,6 @@ class DownloadManager {
                 completion?(.failure(.dataIsNil))
                 return
             }
-            //print("get correct answer")
             
             do {
                 let answer = try JSONSerialization.jsonObject(with: data) as? [String: Any]
